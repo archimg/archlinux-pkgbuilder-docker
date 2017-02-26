@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Overwrite local mirror
+if [ -n "${MIRROR_URL}" ]; then
+	echo "Server = ${MIRROR_URL}" > /etc/pacman.d/mirrorlist
+fi
+
+# Update current system to latest
+# if set, also install additional packages
+if [ -n "${DEP_PKGS}" ]; then
+	pacman -Syu --noconfirm --needed ${DEP_PKGS}
+else
+	pacman -Syu --noconfirm
+fi
+
+chown -R build /pkg
+
+# unset docker-vars for better build
+unset DEP_PKGS MIRROR_URL
+
+cd /pkg
+su build -- makepkg $*
