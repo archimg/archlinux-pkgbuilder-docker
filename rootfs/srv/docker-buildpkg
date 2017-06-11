@@ -7,11 +7,7 @@ fi
 
 # Update current system to latest
 # if set, also install additional packages
-if [ -n "${DEP_PKGS}" ]; then
-	pacman -Syu --noconfirm --needed ${DEP_PKGS}
-else
-	pacman -Syu --noconfirm
-fi
+pacman -Syu --noconfirm ${DEP_PKGS:+--needed ${DEP_PKGS}}
 
 chown -R build /pkg
 
