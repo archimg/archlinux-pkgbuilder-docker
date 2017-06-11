@@ -1,5 +1,5 @@
 FROM archimg/base-devel
-MAINTAINER Benedikt Heine
+LABEL maintainer "ArchLinux Dockerimage Maintainers"
 
 ARG MIRROR_URL="https://mirrors.kernel.org/archlinux/\$repo/os/\$arch"
 
